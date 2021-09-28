@@ -1,0 +1,75 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+
+using namespace std;
+
+// membuat string untuk program enkripsi
+// pada fungsi enkripsi dan dekripsi pesan string, int alfa, dan int beta merupakan bagian dari programnya
+string encryption(string message, int alpha, int beta)
+{
+   string encryptedtext = "";
+
+     for(int r = 0; r < message.length(); r++)
+     {
+// merupakan program untuk melakukan enkripsi
+       if(message[r] != ' ')
+          encryptedtext = encryptedtext + (char) ((((alpha * (message[r] - 'A')) + beta) % 26) + 'A');
+       else
+          encryptedtext += message[r];
+
+     }
+// melakukan return pada enkripsi untuk output
+   return encryptedtext;
+
+}
+
+// membuat string untuk mengembalikan text yang telah dienkripsi menjadi aslinya
+string decryption(string message, int alpha, int beta)
+{
+   string decryptedtext = "";
+
+     for(int s = 0; s < message.length(); s++)
+     {
+
+// merupakan program untuk melakukan deskripsi
+       if(message[s] != ' ')
+         decryptedtext = decryptedtext + (char) ((((alpha * (message[s] - 'A')) - beta) % 26 ) + 'A');
+       else
+         message += decryptedtext[s];
+     }
+
+  return message;
+}
+
+int main()
+{
+   string message;
+   char i;
+   int key1, key2;
+
+// Digunakan untuk memasukkan huruf 
+   while(message[i] < 'A' || message[i] > 'Z')
+   {
+      cout << "Masukkan Kalimat(A - Z) : ";
+      getline(cin, message);
+   }
+// untuk key 1(A)
+   while(key1 <= 0 || key1 >= 26)
+   {
+      cout << "Masukkan Nilai 1-25 untuk key 1  :";
+      cin >> key1;
+   }
+
+// untuk key 2(B)
+   while(key2 <= 0 || key2 >= 26)
+   {
+      cout << "Masukkan Nilai 0-25 untuk key 2 :";
+      cin >> key2;
+   }
+
+// UNTUK Menampilkan data yang telah diketik
+
+   cout << "Kalimat yang akan di enkripsi : " << message << endl;
+   cout << "Hasil enkripsi kalimat : " << encryption(message, key1, key2) << endl;
+   cout << "Hasil deskripsi kalimat : " << decryption(message, key1, key2) << endl;
+}
